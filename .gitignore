@@ -1,0 +1,15 @@
+# IntelliJ
+.idea/
+*.iml
+
+# Maven
+target/
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# Environment
+.env
