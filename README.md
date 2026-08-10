@@ -38,5 +38,6 @@ docker compose down
 ## Démarrer Spring Boot
 
 ```bash
-mvn spring-boot:run
+mvn package
+java -jar banking-bootstrap/target/banking-bootstrap-0.0.1-SNAPSHOT.jar
 ```

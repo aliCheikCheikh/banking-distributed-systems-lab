@@ -11,5 +11,8 @@ target/
 # Logs
 *.log
 
+# Local architecture analysis
+graphify-out/
+
 # Environment
 .env
