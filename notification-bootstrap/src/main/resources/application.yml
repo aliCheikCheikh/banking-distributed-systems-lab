@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: notification-service
+  main:
+    web-application-type: none
+  datasource:
+    url: ${NOTIFICATION_DB_URL:jdbc:postgresql://localhost:5432/notification_db}
+    username: ${NOTIFICATION_DB_USERNAME:notification_user}
+    password: ${NOTIFICATION_DB_PASSWORD}
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+notification:
+  kafka:
+    topic: ${ACCOUNT_EVENTS_TOPIC:account-events}
+    consumer:
+      group-id: ${NOTIFICATION_KAFKA_GROUP_ID:notification-service}
+      concurrency: ${NOTIFICATION_KAFKA_CONCURRENCY:3}
+
+logging:
+  level:
+    org.apache.kafka: WARN

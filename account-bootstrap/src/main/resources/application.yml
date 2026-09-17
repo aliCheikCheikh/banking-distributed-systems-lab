@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: account-service
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:9092}
+
+server:
+  port: ${ACCOUNT_HTTP_PORT:8080}
+
+account:
+  kafka:
+    topic: ${ACCOUNT_EVENTS_TOPIC:account-events}
+
+logging:
+  level:
+    org.apache.kafka: WARN

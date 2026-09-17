@@ -11,10 +11,14 @@
     <name>banking-distributed-systems-lab</name>
     <description>Laboratoire pédagogique sur les systèmes distribués et Kafka dans un contexte bancaire</description>
     <modules>
-        <module>banking-domain</module>
-        <module>banking-application</module>
-        <module>banking-infrastructure</module>
-        <module>banking-bootstrap</module>
+        <module>integration-events</module>
+        <module>account-domain</module>
+        <module>account-application</module>
+        <module>account-infrastructure</module>
+        <module>account-bootstrap</module>
+        <module>notification-application</module>
+        <module>notification-infrastructure</module>
+        <module>notification-bootstrap</module>
     </modules>
 
     <properties>
@@ -25,6 +29,7 @@
         <mockito.version>5.17.0</mockito.version>
         <maven-compiler-plugin.version>3.14.1</maven-compiler-plugin.version>
         <maven-surefire-plugin.version>3.5.6</maven-surefire-plugin.version>
+        <jacoco-maven-plugin.version>0.8.13</jacoco-maven-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -38,17 +43,32 @@
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>banking-domain</artifactId>
+                <artifactId>integration-events</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>banking-application</artifactId>
+                <artifactId>account-domain</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>banking-infrastructure</artifactId>
+                <artifactId>account-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>account-infrastructure</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>notification-application</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>${project.groupId}</groupId>
+                <artifactId>notification-infrastructure</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>
@@ -60,6 +80,27 @@
     </dependencyManagement>
 
     <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
         <pluginManagement>
             <plugins>
                 <plugin>
@@ -75,6 +116,9 @@
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-surefire-plugin</artifactId>
                     <version>${maven-surefire-plugin.version}</version>
+                    <configuration>
+                        <argLine>@{argLine} -Xshare:off -javaagent:${settings.localRepository}/org/mockito/mockito-core/${mockito.version}/mockito-core-${mockito.version}.jar</argLine>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <groupId>org.springframework.boot</groupId>
