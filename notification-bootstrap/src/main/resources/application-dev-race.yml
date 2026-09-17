@@ -1,0 +1,7 @@
+dev-race:
+  enabled: ${DEV_RACE_ENABLED:false}
+  event-id: ${DEV_RACE_EVENT_ID}
+  account-id: ${DEV_RACE_ACCOUNT_ID}
+  customer-id: ${DEV_RACE_CUSTOMER_ID}
+  currency: ${DEV_RACE_CURRENCY}
+  occurred-at: ${DEV_RACE_OCCURRED_AT}
