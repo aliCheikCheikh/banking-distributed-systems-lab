@@ -2,6 +2,18 @@
 
 Laboratoire Java 21 / Spring Boot consacré à Kafka et aux systèmes distribués dans un contexte bancaire simplifié.
 
+## Pourquoi ce projet
+
+Mon projet précédent, [Auto Stock Management](https://autostockapp.com), est un monolithe modulaire : un seul processus, une seule base, une transaction qui couvre l'ensemble d'une opération. Dans ce cadre, la cohérence est presque gratuite.
+
+Ce laboratoire existe pour travailler ce qui se passe quand ce cadre disparaît. Deux processus distincts, un réseau entre les deux, un broker qui garantit la livraison *au moins une fois* — donc des doublons — et plus aucune transaction commune. Les questions changent de nature : que fait le consumer quand il reçoit deux fois le même événement ? Que devient l'événement si l'effet métier échoue après les tentatives de retry ? Comment rejouer un traitement sans corrompre l'état déjà écrit ?
+
+Le domaine bancaire est volontairement minuscule — ouvrir un compte, envoyer une notification de bienvenue. L'intérêt n'est pas le métier mais la mécanique autour : un domaine trivial et une infrastructure comprise en profondeur valent mieux que l'inverse.
+
+C'est enfin une préparation directe à mon M2 Architectures Logicielles (Nantes Université), où les systèmes distribués, le middleware et les architectures réparties occupent une large part du programme.
+
+La section [NEXT LEARNING STEP](#next-learning-step) en fin de README liste ce qui n'est **pas** implémenté. Cette liste fait partie du projet : elle délimite ce qui a réellement été traité ici de ce qui reste à apprendre.
+
 ## Architecture actuelle
 
 ```text
